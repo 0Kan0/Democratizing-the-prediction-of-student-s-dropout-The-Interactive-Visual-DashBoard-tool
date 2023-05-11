@@ -1,5 +1,6 @@
 import base64
 import io
+import os
 import webbrowser
 
 import dash_bootstrap_components as dbc
@@ -196,9 +197,12 @@ def create_AutoML_model(contents, filename):
         df[df.columns[:-1]], df.iloc[:, -1], test_size=0.20
     )
 
+    # Set path to the models folder
+    saved_models_path = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), "saved_AutoML_models", filename.split(".")[0])
+
     # Define the AutoML model configuration
     model = AutoML(
-            results_path="saved_AutoML_models\\" + filename.split(".")[0],
+            results_path=saved_models_path,
             algorithms=["Baseline", "Linear", "Decision Tree", "Random Forest", "Extra Trees", "Xgboost", "LightGBM", "CatBoost", "Neural Network", "Nearest Neighbors"],
             start_random_models=1,
             stack_models=True,
