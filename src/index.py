@@ -74,6 +74,8 @@ app.layout = dbc.Container([
                          - Make sure that the first column of the dataset is reserved for the index.
                          - At least one of the columns should contain continuous values (represented as floating-point numbers)
                          - The last column should have only two unique values: "Dropout" and "No dropout".
+
+                         The code of this app is available at: https://github.com/0Kan0/Democratizing-the-prediction-of-student-s-dropout-The-Interactive-Visual-DashBoard-tool
                         """,
                         style={"margin": "0 10px"},
                     )
