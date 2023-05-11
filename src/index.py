@@ -197,8 +197,17 @@ def create_AutoML_model(contents, filename):
         df[df.columns[:-1]], df.iloc[:, -1], test_size=0.20
     )
 
-    # Set path to the models folder
+    # Set saved models folder path
     saved_models_path = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), "saved_AutoML_models", filename.split(".")[0])
+
+    # If dataset was already loaded, don't need to create a new model
+    if os.path.exists(saved_models_path):
+        model = AutoML(os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), "saved_AutoML_models", filename.split(".")[0]))
+
+        model_report = model.report()
+
+        return model, X_test, y_test, model_report, model, df
+
 
     # Define the AutoML model configuration
     model = AutoML(
