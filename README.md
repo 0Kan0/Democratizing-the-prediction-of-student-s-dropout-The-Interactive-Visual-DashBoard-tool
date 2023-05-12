@@ -23,6 +23,7 @@
   10. If you want load a new dataset, go to the terminal and end the process with Ctrl+C. Then open it again with `python index.py`.
 
 # Home page
+![dashboard.gif](images/home_page.gif)
 
 # Dashboard hub
 ![dashboard.gif](images/dashboard_hub.gif)
