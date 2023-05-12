@@ -5,10 +5,10 @@ from explainerdashboard.custom import *
 
 class FeaturesImportanceBasicTab(ExplainerComponent):
     """
-    A class for creating a 'Feature Impact' tab in an explainer dashboard.
+    A class for creating a 'Predictions' tab in an explainer dashboard.
     """
 
-    def __init__(self, explainer, title="Feature Impact", name=None,
+    def __init__(self, explainer, title="Predictions", name=None,
                 pos_label=None, hide_descriptions=True, hide_selector=True, 
                 hide_type=True, hide_depth=True, hide_popout=True, **kwargs):
         """
