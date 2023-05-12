@@ -125,7 +125,7 @@ app.layout = dbc.Container([
                 children=dbc.Button(
                     f"Go to dashboard",
                     id='dashboard-button-link',
-                    href="http://192.168.1.23:8050", 
+                    href="http://127.0.0.1:8050/", 
                     target="_blank",
                 ),
                 hidden=True
