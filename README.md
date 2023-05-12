@@ -18,7 +18,7 @@
   5. Follow the instrunctions provided in the home screen on the file before uploading it.
   6. Upload the file.
   7. Press "Start" buttton.
-  8. Wait for the process to finish. You can check it in the terminal (note that depending of the size of the dataset and how good your computer is, the process will take more or less).
+  8. Wait for the process to finish. You can check it in the terminal (note that depending of the size of the dataset and how good your computer is, the process will take more or less). The AutoML model of the dataset will be saved in the [saved_AutoML_models](saved_AutoML_models/). If the same dataset is uploaded, the model will be loaded instead of training a new one.
   9. If all went correctly, a "Go to dashboard" button should appear below the "Start" button. Click it and that will open a new tab with the dashboard hub (in case it didn't redirect, navigate to                  http://127.0.0.1:8050).
   10. If you want load a new dataset, go to the terminal and end the process with Ctrl+C. Then open it again with `python index.py`.
 
@@ -28,4 +28,7 @@
 # Dashboard hub
 ![dashboard.gif](images/dashboard_hub.gif)
 
+There will be 2 dashboards we can see in the hub:
+  - AutoML Student Dropout Explainer (Basic Interface): Focused for those that have no knowledge about machine learning. In this dashboard you can acces the "Predictions" tab and "What If" tab.
+  - AutoML Student Dropout Explainer (Advanced Interface): Focused for those that have knowledge about machine learning. In addition of what was already in the other dashboard, here you can all models that were tested by AutoML and which one was the best, as well as different graphs and metrics of the performance of the best model used.
 # Acknowledgements
