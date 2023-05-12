@@ -30,5 +30,5 @@
 
 There will be 2 dashboards we can see in the hub:
   - AutoML Student Dropout Explainer (Basic Interface): Focused for those that have no knowledge about machine learning. In this dashboard you can acces the "Predictions" tab and "What If" tab.
-  - AutoML Student Dropout Explainer (Advanced Interface): Focused for those that have knowledge about machine learning. In addition of what was already in the other dashboard, here you can all models that were tested by AutoML and which one was the best, as well as different graphs and metrics of the performance of the best model used.
+  - AutoML Student Dropout Explainer (Advanced Interface): Focused for those that have knowledge about machine learning. In addition of what was already in the other dashboard, here you can check all models that were tested by AutoML and which one was the best, as well as different graphs and metrics of the performance of the best model used.
 # Acknowledgements
