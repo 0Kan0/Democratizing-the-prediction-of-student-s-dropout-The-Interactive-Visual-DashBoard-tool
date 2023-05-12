@@ -183,6 +183,7 @@ def create_AutoML_model(contents, filename):
             - A `model_report` which contains information about the performance of each algorithm tried by the AutoML model
             - The `trained_model` object which contains the trained model
             - The original dataset `df`.
+            - Bool that indicates if the model was loaded or was trained.
     """
 
     # Parse the CSV data and set the first column as the index
@@ -206,7 +207,7 @@ def create_AutoML_model(contents, filename):
 
         model_report = model.report()
 
-        return model, X_test, y_test, model_report, model, df
+        return model, X_test, y_test, model_report, model, df, True
 
 
     # Define the AutoML model configuration
@@ -231,7 +232,7 @@ def create_AutoML_model(contents, filename):
     model_report = model.report()
 
     # Return the trained model object along with other useful objects for evaluating the model's performance
-    return model, X_test, y_test, model_report, trained_model, df
+    return model, X_test, y_test, model_report, trained_model, df, False
 
 @app.callback(
         Output('output-data','children'),
@@ -319,8 +320,34 @@ def create_dashboard(contents, filename, n_clicks):
     global hub
 
     # Create an AutoML model using the contents of the file
-    model, X_test, y_test, reportML, trained, df = create_AutoML_model(contents, filename)
+    model, X_test, y_test, reportML, trained, df, loaded = create_AutoML_model(contents, filename)
 
+    # If model dataset was already loaded, load explainer
+    if loaded:
+
+        # Set saved models folder path
+        saved_explainer_path = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), "saved_AutoML_models", filename.split(".")[0], "explainer.dill")
+
+        # Create a classifier explainer object
+        explainer = ClassifierExplainer.from_file(saved_explainer_path)
+
+
+        # Create two explainer dashboards with different tabs
+        db1 = ExplainerDashboard(explainer, header_hide_selector=True, hide_poweredby=True, title="AutoML Student Dropout Explainer (Basic Interface)", 
+                                tabs=[FeaturesImportanceBasicTab, WhatIfBasicTab],
+                                description="In this dashboard, you can access the following tabs: Prediction and What If...")
+        
+        db2 = ExplainerDashboard(explainer, header_hide_selector=True, hide_poweredby=True, title="AutoML Student Dropout Explainer (Advanced Interface)",
+                                tabs=[AutoMLReportTab(explainer=explainer, ML_report=reportML), FeaturesImportanceExpertTab, ClassificationStatsTab, WhatIfExpertTab, CounterfactualsTab(explainer=explainer, dataframe=df, trained_model=trained)],
+                                description="In this dashboard, you can access the following tabs: AutoML Report, Feature Importances, Classificaction Stats, What If... and Counterfactual Scenarios.")
+        
+        # Create an explainer hub with the two dashboards
+        hub = ExplainerHub([db1, db2], title="Democratizing the prediction of student's dropout: The Interactive Visual DashBoard tool", n_dashboard_cols=2,
+                            description="")
+
+        # Return no alert message and reveals the html.Div
+        return None, False
+    
     # Create a classifier explainer object
     explainer = ClassifierExplainer(model, X_test, y_test, labels=["Dropout", "No dropout"], target="Target")
 
@@ -336,6 +363,12 @@ def create_dashboard(contents, filename, n_clicks):
     # Create an explainer hub with the two dashboards
     hub = ExplainerHub([db1, db2], title="Democratizing the prediction of student's dropout: The Interactive Visual DashBoard tool", n_dashboard_cols=2,
                         description="")
+    
+    # Set saved models folder path
+    saved_explainer_path = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), "saved_AutoML_models", filename.split(".")[0], "explainer.dill")
+
+    # Save explainer in the models path
+    explainer.dump(saved_explainer_path)
 
     # Return no alert message and reveals the html.Div
     return None, False
