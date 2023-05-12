@@ -25,5 +25,6 @@
 # Home page
 
 # Dashboard hub
+![dashboard.gif](images/dashboard_hub.gif)
 
 # Acknowledgements
