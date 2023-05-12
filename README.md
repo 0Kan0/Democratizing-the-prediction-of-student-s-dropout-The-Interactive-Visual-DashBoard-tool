@@ -5,8 +5,8 @@
 
 # Installation
   1. Download this repository or clone it using `git clone https://github.com/0Kan0/Democratizing-the-prediction-of-student-s-dropout-The-Interactive-Visual-DashBoard-tool.git`.
-  2. Access the downloaded folder.
-  3. Install the required packages by running `pip install -r requirements.txt`. (Optional: You can use a virtual environment before you install the packages and install them inside the environment).
+  2. Access the downloaded folder. (Optional: Create a virtual environment and activate it).
+  3. Install the required packages by running `pip install -r requirements.txt`. 
   4. Once the installation has ended, access to where the libraries are installed, access explainerdashboard library folder and open dashboards.py. There you should change this line of code in order for this app     to work:
   <p align="center">
   <img alt="Before" src="images/Before.png" width="45%">
@@ -32,4 +32,5 @@
 There will be 2 dashboards we can see in the hub:
   - AutoML Student Dropout Explainer (Basic Interface): Focused for those that have no knowledge about machine learning. In this dashboard you can acces the "Predictions" tab and "What If" tab.
   - AutoML Student Dropout Explainer (Advanced Interface): Focused for those that have knowledge about machine learning. In addition of what was already in the other dashboard, here you can check all models that were tested by AutoML and which one was the best, as well as different graphs and metrics of the performance of the best model used.
+
 # Acknowledgements
