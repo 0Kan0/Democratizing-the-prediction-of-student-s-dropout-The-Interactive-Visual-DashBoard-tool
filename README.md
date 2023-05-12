@@ -1,5 +1,5 @@
 # Democratizing the prediction of student's dropout: The Interactive Visual DashBoard tool
-This python app allows the user to upload a dataset of students and, with zero knowledge of machine learning, generate the best posible model, see performance graphs and metrics, and make predictions of these students. Making this predictions gives the possibility to detect which are the causes that makes a student to dropout. We can use this information to help future students.
+This python app allows the user to upload a dataset of students and, with zero knowledge of machine learning, generate the best posible model, see performance graphs and metrics, and make predictions of these students. Making this predictions gives the possibility to detect which are the causes that makes a student to dropout, allowing the user to use this information to help future students.
 
 It is worth noting the use of these packages:
   - [explainerdashboard](https://github.com/oegedijk/explainerdashboard) by [Oege Dijk](https://github.com/oegedijk):
