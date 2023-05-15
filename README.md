@@ -23,9 +23,9 @@ It is worth noting the use of these packages:
   3. Install the required packages by running `pip install -r requirements.txt`. 
   4. Once the installation has ended, access to where the packages are installed, access explainerdashboard folder and open dashboards.py. There you should change this line of code in order for this app     to work:
   <p align="center">
-  <img alt="Before" src="images/Before.png" width="45%">
+  <img alt="Before" src="readme_images/Before.png" width="45%">
   &nbsp; &nbsp; &nbsp; &nbsp;
-  <img alt="After" src="images/After.png" width="45%">
+  <img alt="After" src="readme_images/After.png" width="45%">
   </p>
 
 # Usage
@@ -38,10 +38,10 @@ It is worth noting the use of these packages:
   11. If you want load a new dataset, go to the terminal and end the process with Ctrl+C. Then open it again with `python index.py`.
 
 # Home page
-![dashboard.gif](images/home_page.gif)
+![dashboard.gif](readme_images/home_page.gif)
 
 # Dashboard hub
-![dashboard.gif](images/dashboard_hub.gif)
+![dashboard.gif](readme_images/dashboard_hub.gif)
 
 There will be 2 dashboards we can see in the hub:
   - AutoML Student Dropout Explainer (Basic Interface): Focused for those that have no knowledge about machine learning. In this dashboard you can acces the "Predictions" tab and "What If" tab.
