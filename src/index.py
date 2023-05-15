@@ -198,17 +198,17 @@ def create_AutoML_model(contents, filename):
         df[df.columns[:-1]], df.iloc[:, -1], test_size=0.20
     )
 
-    # Set saved models folder path
-    saved_models_path = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), "saved_AutoML_models", filename.split(".")[0])
-
     # If dataset was already loaded, don't need to create a new model
-    if os.path.exists(saved_models_path):
-        model = AutoML(os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), "saved_AutoML_models", filename.split(".")[0]))
+    if os.path.exists(os.path.join("saved_models",filename.split(".")[0],"AutoML")):
+        model = AutoML(os.path.join("saved_models",filename.split(".")[0],"AutoML"))
 
         model_report = model.report()
 
         return model, X_test, y_test, model_report, model, df, True
 
+    # Set saved models folder path
+    saved_models_path = os.path.join("saved_models",filename.split(".")[0],"AutoML")
+    os.makedirs(saved_models_path)
 
     # Define the AutoML model configuration
     model = AutoML(
@@ -326,7 +326,7 @@ def create_dashboard(contents, filename, n_clicks):
     if loaded:
 
         # Set saved models folder path
-        saved_explainer_path = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), "saved_AutoML_models", filename.split(".")[0], "explainer.dill")
+        saved_explainer_path = os.path.join("saved_models",filename.split(".")[0],"explainer.dill")
 
         # Create a classifier explainer object
         explainer = ClassifierExplainer.from_file(saved_explainer_path)
@@ -365,7 +365,7 @@ def create_dashboard(contents, filename, n_clicks):
                         description="")
     
     # Set saved models folder path
-    saved_explainer_path = os.path.join(os.path.abspath(os.path.join(os.getcwd(), os.pardir)), "saved_AutoML_models", filename.split(".")[0], "explainer.dill")
+    saved_explainer_path = os.path.join("saved_models",filename.split(".")[0],"explainer.dill")
 
     # Save explainer in the models path
     explainer.dump(saved_explainer_path)
