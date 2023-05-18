@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 import dice_ml as dml
 import pandas as pd
 
+import time
 from dash import dcc, html, Input, Output, State, dash_table
 from dash.dependencies import Input, Output, State
 from dash.exceptions import PreventUpdate
@@ -387,3 +388,47 @@ class CounterfactualsComponent(ExplainerComponent):
             
             # Return a tuple containing the counterfactuals data, counterfactuals columns, original data, original columns, and False values for the last two elements of the tuple
             return counterfactuals_data, counterfactuals_columns, original_data, original_columns, False, False
+        
+class TimerComponent(ExplainerComponent):
+    def __init__(self, explainer, title="Timer", name=None, **kwargs):
+        super().__init__(explainer, title, name)
+
+
+    def layout(self):
+        return dbc.CardBody([
+                dbc.Row([
+                    dcc.Store(id="time"),
+                    html.H2(id="display-time", children='Start timer'),
+                    html.Br(),
+                    dbc.Button(f"Start", color="primary", id="start-button", style={'textAlign': 'center', 'width': '10%',}),
+                    html.Br(),
+                    dbc.Button(f"Stop", color="primary", id="stop-button", style={'textAlign': 'center', 'width': '10%'}),
+                ], class_name="mb-2"),
+        ], class_name="h-100")
+
+    def component_callbacks(self, app):
+        @app.callback(
+            Output('display-time', 'children'),
+            Output('time', 'data'),
+            Output('stop-button', 'n_clicks'),
+            Input('start-button', 'n_clicks'),
+            Input('stop-button', 'n_clicks'),
+            State('time', 'data'),
+            prevent_initial_call=True
+        )
+        def update_timer(n_clicks_start, n_clicks_stop, start_time):
+            if n_clicks_start and not n_clicks_stop:
+                started_timer = time.time()
+                return "The timer has started.", started_timer, None
+            
+            stopped_timer = time.time()
+            try:
+                elapsed_time = stopped_timer - start_time
+            except:
+                return 'Start timer', None, None
+            
+            minutes, seconds = divmod(elapsed_time, 60)
+            hours, minutes = divmod(minutes, 60)
+
+            return f"{int(hours):02d}:{int(minutes):02d}:{int(seconds):02d}", None, None
+    

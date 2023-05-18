@@ -3,6 +3,7 @@ import dash_bootstrap_components as dbc
 
 from explainerdashboard.custom import *
 from tabs.components.components import SelectStudentComponent
+from tabs.components.components import TimerComponent
 
 class WhatIfBasicTab(ExplainerComponent):
     """
@@ -40,6 +41,7 @@ class WhatIfBasicTab(ExplainerComponent):
                         hide_selector=hide_selector, **kwargs)
         self.contribution = ShapContributionsGraphComponent(explainer, name=self.name+"3",
                         hide_selector=hide_selector, **kwargs)
+        self.timer = TimerComponent(explainer, name=self.name+"4", **kwargs)
         self.index_connector = IndexConnector(self.index, [self.input, self.contribution], 
                         explainer=explainer if index_check else None)
 
@@ -53,6 +55,11 @@ class WhatIfBasicTab(ExplainerComponent):
 
         # Create a Bootstrap container
         return dbc.Container([
+            dbc.Row([ 
+                dbc.Col([
+                    self.timer.layout(),
+                ], width=7, style=dict(margin=30)), 
+            ], class_name="mt-4"),
             dbc.Row([ 
                 dbc.Col([
                     html.H3("Description"),
@@ -136,6 +143,7 @@ class WhatIfExpertTab(ExplainerComponent):
                         hide_selector=hide_selector, **kwargs)
         self.contribution = ShapContributionsGraphComponent(explainer, name=self.name+"3",
                         hide_selector=hide_selector, **kwargs)
+        self.timer = TimerComponent(explainer, name=self.name+"4", **kwargs)
         self.index_connector = IndexConnector(self.index, [self.input, self.contribution], 
                         explainer=explainer if index_check else None)
 
@@ -149,6 +157,11 @@ class WhatIfExpertTab(ExplainerComponent):
 
         # Create a Bootstrap container
         return dbc.Container([
+            dbc.Row([
+                # Display ShapContributionsGraphComponent
+                dbc.Col(
+                        self.timer.layout()),
+                ], class_name="mt-4 gx-4"),
             dbc.Row([
                 # Display ShapContributionsGraphComponent
                 dbc.Col(
